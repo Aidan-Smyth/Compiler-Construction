@@ -6,20 +6,29 @@ import java.util.regex.Matcher;
 public class lex {
 
     public static ArrayList<Token> getToken(String program) {
+
+        //array to hold tokens
         ArrayList<Token> TokenArray = new ArrayList<Token>();
+
+        //reg ex patterns to match
         Pattern WHITESPACE = Pattern.compile("\\s");
         Pattern ALPHANUMERIC = Pattern.compile("[A-Za-z0-9]");
         Pattern NUMERIC = Pattern.compile("[0-9]");
+
+        //token to be stored in array
         Token token = new Token();
         token.setSource("");
         token.setType("");
+
         String temp;
 
         for (int i = 0; i < program.length(); i++) {
 
+            //determining what reg ex pattern the current char matches
             Matcher tokeword = ALPHANUMERIC.matcher(String.valueOf(program.charAt(i)));
             Matcher tokenumber = NUMERIC.matcher(String.valueOf(program.charAt(i)));
             Matcher tokewhite = WHITESPACE.matcher(String.valueOf(program.charAt(i)));
+
             // System.out.println(String.valueOf(program.charAt(i)));
             boolean tokewordFound = tokeword.find();
             // System.out.println(" tokeword " + tokewordFound);
@@ -28,10 +37,13 @@ public class lex {
             boolean tokewhiteFound = tokewhite.find();
             // System.out.println(" tokewhite " + tokewhiteFound);
 
+            //if char = white space
             if (tokewhiteFound == true) {
                 token = new Token();
                 token.setSource("");
                 token.setType("");
+
+                //if char = letter or number
             } else if (tokewordFound == true) {
                 if (token.getType() != "tokword" && token.getType() != "toknumber") {
                     token = new Token();
@@ -42,6 +54,7 @@ public class lex {
                 temp = token.getSource() + String.valueOf(program.charAt(i));
                 token.setSource(temp);
             } else {
+                //if char = operator
                 if (token.getType() != "tokop" || token.getSource().length() > 0) {
                     token = new Token();
                     token.setSource(String.valueOf(program.charAt(i)));
@@ -56,6 +69,7 @@ public class lex {
 
     public static void main(String[] args) {
 
+        
         String program = "PROGRAM Sample (Input, Output); CONST x  = 15; BEGIN END;";
         ArrayList<Token> TokenArray = getToken(program);
 
@@ -68,6 +82,7 @@ public class lex {
 
 }
 
+//token object
 class Token {
     private String source;
     private String type;
