@@ -75,21 +75,39 @@ public class lex {
             if (symbolTable.containsSymbol(TokenArray.get(i).getSource().toLowerCase())) {
                 TokenArray.get(i)
                         .setSymbolTablePointer(symbolTable.getSymbol(TokenArray.get(i).getSource().toLowerCase()));
-            }
-            // } else {
 
-            // if (TokenArray.get(i).getType() == "tokword") {
-            // Attribute identifierAttr = new Attribute();
-            // identifierAttr.setSymbolType("tokidentifer");
-            // identifierAttr.setDataType("none");
-            // identifierAttr.setTokenClass("tokidentifer");
-            // symbolTable.addToAttributeTable("tokidentifier", identifierAttr);
-            // Symbol identifierSymbol = new Symbol("identifier", "tokidentifier",
-            // "variable", "integer", "0", "global",
-            // identifierAttr);
-            // symbolTable.addSymbol("integer", identifierSymbol);
-            // }
-            // }
+            } else if (TokenArray.get(i).getType() == "tokword") {
+                Attribute identifierAttr = new Attribute();
+                identifierAttr.setSymbolType("tokidentifer");
+                identifierAttr.setDataType("none");
+                identifierAttr.setTokenClass("tokidentifer");
+                symbolTable.addToAttributeTable("tokidentifier", identifierAttr);
+                Symbol identifierSymbol = new Symbol("identifier", "tokidentifier",
+                        "variable", "none", "0", "global",
+                        identifierAttr);
+                symbolTable.addSymbol(TokenArray.get(i).getSource(), identifierSymbol);
+
+                TokenArray.get(i)
+                        .setSymbolTablePointer(identifierSymbol);
+            } else if (TokenArray.get(i).getType() == "toknumber") {
+                Attribute numberAttr = new Attribute();
+                numberAttr.setSymbolType("tokconstant");
+                numberAttr.setDataType("none");
+                numberAttr.setTokenClass("tokconstant");
+                symbolTable.addToAttributeTable("tokconstant", numberAttr);
+                Symbol numberSymbol = new Symbol("constant", "tokconstant",
+                        "literal", "integer", TokenArray.get(i).getSource(), "global",
+                        numberAttr);
+                symbolTable.addSymbol(TokenArray.get(i).getSource(), numberSymbol);
+                TokenArray.get(i)
+                        .setSymbolTablePointer(numberSymbol);
+            }
+
+            if (TokenArray.get(i).getType() == "toknumber" && TokenArray.get(i - 2).getType() == "tokword"
+                    && TokenArray.get(i - 1).getType() == "tokop") {
+                Symbol sym = TokenArray.get(i - 2).getSymbolTablePointer();
+                sym.setValue(TokenArray.get(i).getSource());
+            }
         }
 
         return TokenArray;
@@ -98,7 +116,7 @@ public class lex {
 
     public static void main(String[] args) {
 
-        String program = "PROGRAM Sample (Input, Output); CONST x  = 15; BEGIN END;";
+        String program = "PROGRAM Sample; CONST x  = 15; BEGIN END.";
         ArrayList<Token> TokenArray = getToken(program);
 
         // for (Token token2 : TokenArray) {
@@ -118,6 +136,7 @@ public class lex {
             } else {
                 System.out.println("Symbol not defined");
             }
+
         }
     }
 

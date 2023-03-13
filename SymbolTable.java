@@ -46,7 +46,7 @@ public class SymbolTable {
         semiColonAttr.setTokenClass("operator");
         attributeTable.addSymbol("toksemicolon", semiColonAttr);
         Symbol semiColonSymbol = new Symbol(";", "toksemicolon", "operator", "none", "0", "global", semiColonAttr);
-        this.addSymbol("semiColon", semiColonSymbol);
+        this.addSymbol(";", semiColonSymbol);
 
         Attribute constAttr = new Attribute();
         constAttr.setSymbolType("tokword");
@@ -62,7 +62,7 @@ public class SymbolTable {
         equalsAttr.setTokenClass("operator");
         attributeTable.addSymbol("tokequal", equalsAttr);
         Symbol equalsSymbol = new Symbol("=", "tokequal", "operator", "none", "0", "global", equalsAttr);
-        this.addSymbol("equals", equalsSymbol);
+        this.addSymbol("=", equalsSymbol);
 
         Attribute beginAttr = new Attribute();
         beginAttr.setSymbolType("tokbegin");
@@ -86,7 +86,32 @@ public class SymbolTable {
         periodAttr.setTokenClass("operator");
         attributeTable.addSymbol("tokperiod", periodAttr);
         Symbol periodSymbol = new Symbol(".", "tokperiod", "operator", "none", "0", "global", periodAttr);
-        this.addSymbol("period", periodSymbol);
+        this.addSymbol(".", periodSymbol);
+
+        Attribute rightParenAttr = new Attribute();
+        rightParenAttr.setSymbolType("tokrightparen");
+        rightParenAttr.setDataType("none");
+        rightParenAttr.setTokenClass("operator");
+        attributeTable.addSymbol("tokrightparen", periodAttr);
+        Symbol rightParenSymbol = new Symbol(")", "tokrightparen", "operator", "none", "0", "global", rightParenAttr);
+        this.addSymbol(")", rightParenSymbol);
+
+        Attribute leftParenAttr = new Attribute();
+        leftParenAttr.setSymbolType("tokleftparen");
+        leftParenAttr.setDataType("none");
+        leftParenAttr.setTokenClass("operator");
+        attributeTable.addSymbol("tokleftparen", periodAttr);
+        Symbol leftParenSymbol = new Symbol("(", "tokleftparen", "operator", "none", "0", "global", leftParenAttr);
+        this.addSymbol("(", leftParenSymbol);
+
+        Attribute commaAttr = new Attribute();
+        commaAttr.setSymbolType("tokcomma");
+        commaAttr.setDataType("none");
+        commaAttr.setTokenClass("operator");
+        attributeTable.addSymbol("tokcomma", commaAttr);
+        Symbol commaSymbol = new Symbol(",", "tokcomma", "operator", "none", "0", "global", commaAttr);
+        this.addSymbol(",", commaSymbol);
+
     }
 
     public SymbolTable(SymbolTable other) {
@@ -126,7 +151,7 @@ public class SymbolTable {
         }
     }
 
-    public void addToAttributeTable(String key, Attribute object){
+    public void addToAttributeTable(String key, Attribute object) {
         attributeTable.addSymbol(key, object);
     }
 }
