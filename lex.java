@@ -22,6 +22,8 @@ public class lex {
         token.setType("");
 
         String temp;
+        
+        boolean comment = false;
 
         for (int i = 0; i < program.length(); i++) {
 
@@ -37,12 +39,20 @@ public class lex {
             // System.out.println(" tokenumber " + tokenumberFound);
             boolean tokewhiteFound = tokewhite.find();
             // System.out.println(" tokewhite " + tokewhiteFound);
+            
+            // Recognizes when a comment starts
+            if(program.charAt(i) == '{')
+                comment = true;
 
-            // if char = white space
-            if (tokewhiteFound == true) {
+            // if char = white space, or currently in comment
+            if (tokewhiteFound == true || comment) {
                 token = new Token();
                 token.setSource("");
                 token.setType("");
+                
+                // Recognizes when a comment ends
+                if(program.charAt(i) == '}')
+                    comment = false;
 
                 // if char = letter or number
             } else if (tokewordFound == true) {
@@ -120,7 +130,7 @@ public class lex {
 
     public static void main(String[] args) {
 
-        String program = "PROGRAM Sample; CONST x  = 15; BEGIN END.";
+        String program = "PROGRAM Sample; {This is a comment} CONST x  = 15; BEGIN END.";
         ArrayList<Token> TokenArray = getToken(program);
 
         // for (Token token2 : TokenArray) {
