@@ -14,6 +14,8 @@ public class Symbol {
 
     private Attribute AttributePointer;
 
+   
+
     public Symbol(String l, String tc, String st, String dt, String v, String s, Attribute a) {
         lexeme = l;
         tokenClass = tc;
@@ -63,6 +65,8 @@ public class Symbol {
         return AttributePointer;
     }
 
+  
+
     // setters
     public void setLexeme(String l) {
         this.lexeme = l;
@@ -91,4 +95,6 @@ public class Symbol {
     public void setAttributePointer(Attribute attribute) {
         this.AttributePointer = attribute;
     }
+
+   
 }

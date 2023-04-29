@@ -217,7 +217,9 @@ public:
     void printtoken(int i);
 
     // Returns basic information about symbols
-    tokentype gettok_class(int tabindex); // Returns the token class
+    tokentype 
+    
+    _class(int tabindex); // Returns the token class
     inline enum datatype                  // Returns the data type
     getdatatype(int tabindex)
     {

@@ -1,56 +1,26 @@
 public class Auxiliary {
 
-    private String arrayType;
+    private Symbol UpperBound;
 
-    private String Type;
+    private Symbol LowerBound;
 
-    private String Size;
-
-    private String UpperBound;
-
-    private String LowerBound;
-
-    // getters
-
-    public String getArrayType() {
-        return arrayType;
-    }
-
-    public String getSymbol() {
+   
+    public Symbol getSymbol() {
         return UpperBound;
     }
 
-    public String getType() {
-        return Type;
-    }
+   
 
-    public String getSize() {
-        return Size;
-    }
-
-    public String getMemoryLocation() {
+    public Symbol getMemoryLocation() {
         return LowerBound;
     }
 
     // setters
 
-    public void setArrayType(String at) {
-        this.arrayType = at;
-    }
+    
 
-    public void setSymbol(String ub) {
+    public void setSymbol(Symbol ub) {
         this.UpperBound = ub;
     }
 
-    public void setType(String type) {
-        this.Type = type;
-    }
-
-    public void setSize(String size) {
-        this.Size = size;
-    }
-
-    public void setMemoryLocation(String lb) {
-        this.LowerBound = lb;
-    }
 }

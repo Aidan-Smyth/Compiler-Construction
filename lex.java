@@ -70,11 +70,15 @@ public class lex {
 
     public static ArrayList<Token> getSymbols(ArrayList<Token> TokenArray) {
         SymbolTable symbolTable = new SymbolTable();
-
+        HashMap<Integer, Integer> arrayLoc = new HashMap<>();
         for (int i = 0; i < TokenArray.size(); i++) {
             if (symbolTable.containsSymbol(TokenArray.get(i).getSource().toLowerCase())) {
                 TokenArray.get(i)
                         .setSymbolTablePointer(symbolTable.getSymbol(TokenArray.get(i).getSource().toLowerCase()));
+
+                if (TokenArray.get(i).getSymbolTablePointer().getSymbolType().equals("tokbegin")) {
+
+                }
 
             } else if (TokenArray.get(i).getType() == "tokword") {
                 Attribute identifierAttr = new Attribute();
@@ -124,7 +128,6 @@ public class lex {
         // System.out.println(token2.getType());
         // }
 
-        SymbolTable symbolTable = new SymbolTable();
         // symbolTable.printSymbolTable();
 
         TokenArray = getSymbols(TokenArray);
@@ -138,6 +141,13 @@ public class lex {
             }
 
         }
+
+        Parse parser = new Parse();
+        Stack<String> stack = parser.parse(TokenArray);
+        for (String st : stack) {
+            System.out.println("i hope this works " + st);
+        }
+
     }
 
 }

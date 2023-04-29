@@ -6,7 +6,8 @@ public class Attribute {
 
     private String tokenClass;
 
-    
+    private Auxiliary AuxPointer;
+
     // getters
 
     public String getSymbolType() {
@@ -21,6 +22,9 @@ public class Attribute {
         return tokenClass;
     }
 
+    public Auxiliary getAuxPointer() {
+        return AuxPointer;
+    }
 
     // setters
 
@@ -36,4 +40,7 @@ public class Attribute {
         this.tokenClass = tc;
     }
 
+    public void setAuxPointer(Auxiliary aux) {
+        this.AuxPointer = aux;
+    }
 }
